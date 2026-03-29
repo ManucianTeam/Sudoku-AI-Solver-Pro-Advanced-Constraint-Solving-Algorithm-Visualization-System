@@ -1,0 +1,149 @@
+/* ========================
+   GLOBAL
+======================== */
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #fff;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 20px;
+    font-size: 28px;
+}
+
+
+/* ========================
+   GRID
+======================== */
+#grid {
+    display: grid;
+    grid-template-columns: repeat(9, 50px);
+    gap: 3px;
+    justify-content: center;
+    margin: 30px auto;
+}
+
+/* Sudoku cell */
+.cell {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 20px;
+    border: 1px solid #334155;
+    background: rgba(30, 41, 59, 0.8);
+    color: white;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+/* Focus */
+.cell:focus {
+    outline: none;
+    background: #334155;
+    transform: scale(1.05);
+}
+
+/* Active solving cell */
+.active {
+    background: #22c55e !important;
+    color: black;
+    font-weight: bold;
+}
+
+
+/* ========================
+   BOX BORDERS (3x3)
+======================== */
+.cell:nth-child(3n) {
+    border-right: 2px solid #94a3b8;
+}
+
+.cell:nth-child(9n+1) {
+    border-left: 2px solid #94a3b8;
+}
+
+/* horizontal blocks */
+#grid .cell:nth-child(n+19):nth-child(-n+27),
+#grid .cell:nth-child(n+46):nth-child(-n+54) {
+    border-bottom: 2px solid #94a3b8;
+}
+
+#grid .cell:nth-child(n+1):nth-child(-n+9),
+#grid .cell:nth-child(n+28):nth-child(-n+36),
+#grid .cell:nth-child(n+55):nth-child(-n+63) {
+    border-top: 2px solid #94a3b8;
+}
+
+
+/* ========================
+   CONTROLS
+======================== */
+.controls {
+    margin: 10px;
+}
+
+button,
+select {
+    padding: 10px 14px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Buttons */
+button {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+
+/* Dropdown */
+select {
+    background: #1e293b;
+    color: white;
+    border: 1px solid #334155;
+}
+
+
+/* ========================
+   STATS PANEL
+======================== */
+#stats {
+    margin-top: 25px;
+    padding: 15px 20px;
+    background: rgba(30, 41, 59, 0.7);
+    border-radius: 12px;
+    display: inline-block;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ========================
+   ANIMATION EFFECTS
+======================== */
+.cell {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
