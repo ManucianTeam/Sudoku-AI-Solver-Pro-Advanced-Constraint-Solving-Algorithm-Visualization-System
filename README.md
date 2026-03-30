@@ -125,6 +125,6 @@
 ## ⚙️ Installation
 
 ```bash
-git clone https://github.com/your-repo/sudoku-ai-solver-pro.git
+git clone https://github.com/ManucianTeam/sudoku-ai-solver-pro.git
 cd sudoku-ai-solver-pro
 pip install fastapi uvicorn
