@@ -1,0 +1,76 @@
+version: 2
+
+updates:
+  # 🔹 Node.js (npm / yarn)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manucian-official"
+    assignees:
+      - "manucian-official"
+    commit-message:
+      prefix: "deps"
+    versioning-strategy: increase
+    labels:
+      - "dependencies"
+      - "npm"
+    groups:
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-major"
+
+  # 🔹 GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "manucian-official"
+    labels:
+      - "dependencies"
+      - "github-actions"
+
+  # 🔹 Docker
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "manucian-official"
+    labels:
+      - "dependencies"
+      - "docker"
+
+  # 🔹 Python (pip)
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "manucian-official"
+    labels:
+      - "dependencies"
+      - "python"
+    allow:
+      - dependency-type: "direct"
+
+  # 🔹 Java (Maven)
+  - package-ecosystem: "maven"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "manucian-official"
+    labels:
+      - "dependencies"
+      - "java"
