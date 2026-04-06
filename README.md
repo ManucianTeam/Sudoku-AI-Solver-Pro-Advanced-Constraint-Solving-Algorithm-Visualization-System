@@ -1,124 +1,103 @@
 <div align="center">
 
-<!-- TITLE -->
-<h1 style="font-size: 42px; 
-           background: linear-gradient(90deg,#38bdf8,#6366f1,#a78bfa); 
-           -webkit-background-clip: text; 
-           color: transparent;
-           animation: glow 2s infinite alternate;">
-🧩 Sudoku AI Solver Pro
-</h1>
+<h1>🧩 Sudoku AI Solver Pro</h1>
 
 <p>
 ⚡ Advanced Constraint Solving • 🚀 Visualization • 🤖 AI-Powered Logic
 </p>
 
-<!-- BADGES -->
 <p>
 <img src="https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python">
 <img src="https://img.shields.io/badge/FastAPI-Backend-green?style=for-the-badge&logo=fastapi">
 <img src="https://img.shields.io/badge/AI-CSP%20Solver-purple?style=for-the-badge">
 <img src="https://img.shields.io/badge/UI-Interactive-orange?style=for-the-badge">
+<img src="https://img.shields.io/badge/Status-Active-success?style=for-the-badge">
 </p>
 
 </div>
 
 ---
 
-<!-- STYLE -->
-<style>
-@keyframes glow {
-  from { text-shadow: 0 0 10px #38bdf8; }
-  to   { text-shadow: 0 0 20px #a78bfa; }
-}
-
-.card {
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  padding: 16px;
-  border-radius: 12px;
-  margin: 10px 0;
-  color: #fff;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-}
-
-.glow {
-  color: #38bdf8;
-  text-shadow: 0 0 8px #38bdf8;
-}
-
-</style>
-
----
-
 ## 🌟 Overview
 
-<div class="card">
+<b>Sudoku AI Solver Pro</b> is an advanced system for solving Sudoku using modern AI and constraint-based techniques.
 
-<strong class="glow">Sudoku AI Solver Pro</strong> là một hệ thống giải Sudoku nâng cao sử dụng:
+It combines:
 
-- 🧠 Constraint Satisfaction Problem (CSP)  
-- ⚡ Backtracking + Heuristics  
-- 🔗 Arc Consistency (AC-3)  
-- 💀 Dancing Links (Knuth Algorithm X)  
+<ul>
+<li>🧠 Constraint Satisfaction Problem (CSP)</li>
+<li>⚡ Heuristic Search (MRV, Degree, LCV)</li>
+<li>🔗 Arc Consistency (AC-3)</li>
+<li>💀 Dancing Links (Algorithm X)</li>
+</ul>
 
-✨ Không chỉ giải Sudoku — mà còn:
-- 📊 So sánh hiệu năng thuật toán  
-- 🎬 Trực quan hóa từng bước  
-- 🤖 Giải thích logic như con người  
-
-</div>
+<p><i>More than a solver — a full algorithm visualization system.</i></p>
 
 ---
 
 ## 🚀 Features
 
-<div class="card">
+### 🔥 Core Engine
 
-### 🔥 Core
-- ✅ Backtracking Solver  
-- ✅ CSP Solver (MRV + Degree + LCV)  
-- ✅ AC-3 Constraint Propagation  
-- ✅ DLX (Fastest Solver)  
+<ul>
+<li>Backtracking Solver</li>
+<li>CSP Solver (MRV + Degree + LCV)</li>
+<li>AC-3 Constraint Propagation</li>
+<li>DLX (Ultra-fast exact cover solver)</li>
+</ul>
 
-### 🎨 UI
-- 🎮 Interactive Sudoku Grid  
-- ⚡ Animation solving  
-- 🟢 Highlight step-by-step  
+### 🎨 Interactive UI
 
-### 📊 Analysis
-- ⏱ Time (ms)  
-- 🔁 Steps  
-- 🔄 Backtracks  
-- ⚔️ Algorithm Comparison  
+<ul>
+<li>Dynamic Sudoku grid</li>
+<li>Real-time solving</li>
+<li>Step highlighting</li>
+</ul>
 
-</div>
+### 📊 Performance Analysis
+
+<ul>
+<li>Execution time</li>
+<li>Steps / Backtracks</li>
+<li>Algorithm comparison (CSP vs DLX)</li>
+</ul>
 
 ---
 
 ## 🧠 Algorithms
 
-<div class="card">
-
-| Level | Algorithm |
-|------|----------|
-| Basic | Backtracking |
-| Intermediate | MRV + Forward Checking |
-| Advanced | CSP + AC-3 |
-| 💀 Expert | Dancing Links (DLX) |
-
-</div>
+<table align="center">
+<tr>
+<th>Level</th>
+<th>Technique</th>
+</tr>
+<tr>
+<td>Basic</td>
+<td>Backtracking</td>
+</tr>
+<tr>
+<td>Intermediate</td>
+<td>MRV + Forward Checking</td>
+</tr>
+<tr>
+<td>Advanced</td>
+<td>CSP + AC-3</td>
+</tr>
+<tr>
+<td>💀 Expert</td>
+<td>Dancing Links (DLX)</td>
+</tr>
+</table>
 
 ---
 
 ## 📸 Demo
 
-<div align="center">
-
+<p align="center">
 <img src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif" width="500"/>
+</p>
 
-<p><i>✨ Visualization demo (placeholder)</i></p>
-
-</div>
+<p align="center"><i>Visualization demo (placeholder)</i></p>
 
 ---
 
@@ -127,4 +106,139 @@
 ```bash
 git clone https://github.com/ManucianTeam/sudoku-ai-solver-pro.git
 cd sudoku-ai-solver-pro
-pip install fastapi uvicorn
+
+pip install -r requirements.txt
+```
+
+---
+
+## ▶️ Run Backend
+
+```bash
+uvicorn server:app --reload
+```
+
+<p>
+Open:
+<br>
+<code>http://127.0.0.1:8000/docs</code>
+</p>
+
+---
+
+## 🌐 Run Frontend
+
+<p>
+Open file:
+<br>
+<code>web/index.html</code>
+</p>
+
+---
+
+## 🔌 API Example
+
+<b>POST /solve</b>
+
+```json
+{
+  "board": [[...]],
+  "algorithm": "csp"
+}
+```
+
+<b>Response:</b>
+
+```json
+{
+  "success": true,
+  "board": [[...]],
+  "steps": 123
+}
+```
+
+---
+
+## 🏗️ Project Structure
+
+```bash
+sudoku-ai-solver-pro/
+│
+├── solver/
+├── heuristics/
+├── utils/
+├── web/
+│
+├── server.py
+├── pyproject.toml
+├── README.md
+```
+
+---
+
+## 🧪 Testing
+
+```bash
+pytest
+```
+
+---
+
+## 🧠 Architecture
+
+```text
+Frontend (JavaScript)
+        ↓
+FastAPI Backend
+        ↓
+CSP / DLX Engine
+```
+
+---
+
+## ⚡ Performance Insight
+
+<ul>
+<li>CSP → flexible, explainable</li>
+<li>DLX → extremely fast (exact cover)</li>
+</ul>
+
+<p><i>Hybrid approach = speed + intelligence</i></p>
+
+---
+
+## 🔮 Future Improvements
+
+<ul>
+<li>WebSocket real-time solving</li>
+<li>Benchmark dashboard</li>
+<li>AI explanation system</li>
+<li>Mobile UI</li>
+</ul>
+
+---
+
+## 📄 License
+
+MIT License
+
+---
+
+## ⭐ Contributing
+
+Pull requests are welcome.
+For major changes, open an issue first.
+
+---
+
+## 💡 Final Note
+
+This project demonstrates:
+
+<ul>
+<li>Algorithmic thinking</li>
+<li>AI problem solving</li>
+<li>Full-stack integration</li>
+</ul>
+
+<p align="center"><b>🚀 Built as a portfolio-grade system</b></p>
