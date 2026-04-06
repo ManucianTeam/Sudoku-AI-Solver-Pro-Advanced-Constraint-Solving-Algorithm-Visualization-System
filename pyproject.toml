@@ -1,21 +1,116 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
+
+
+# ---------------------------------------------------------------------------
+# Project Metadata
+# ---------------------------------------------------------------------------
 
 [project]
 name = "sudoku-ai-solver-pro"
-version = "1.0.0"
-description = "Advanced Sudoku Solver using CSP, AC3, DLX"
+version = "0.1.0"
+description = "Advanced Sudoku Solver using CSP, Heuristics, and Dancing Links (DLX)"
 authors = [
-    { name="manucian-official", email="khoigaming2102pro@gmail.com" }
+    { name = "kennz_psix", email = "khoigaming2102pro@gmail.com }
 ]
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
+
+keywords = ["sudoku", "ai", "csp", "algorithm", "dlx", "solver"]
+
+license = { text = "MIT" }
 
 dependencies = [
-    "fastapi",
-    "uvicorn"
+    "fastapi>=0.110.0",
+    "uvicorn>=0.29.0"
 ]
 
-[project.urls]
-Homepage = "https://github.com/ManucianTeam/Sudoku-AI-Solver-Pro-Advanced-Constraint-Solving-Algorithm-Visualization-System"
+
+# ---------------------------------------------------------------------------
+# Optional Dependencies
+# ---------------------------------------------------------------------------
+
+[project.optional-dependencies]
+
+dev = [
+    "pytest>=8.0.0",
+    "black>=24.0.0",
+    "ruff>=0.3.0",
+    "mypy>=1.8.0"
+]
+
+viz = [
+    "matplotlib>=3.8.0"
+]
+
+
+# ---------------------------------------------------------------------------
+# CLI Entry Point
+# ---------------------------------------------------------------------------
+
+[project.scripts]
+sudoku-solver = "main:main"
+
+
+# ---------------------------------------------------------------------------
+# Setuptools Config
+# ---------------------------------------------------------------------------
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["solver*", "heuristics*", "utils*"]
+
+
+# ---------------------------------------------------------------------------
+# Black (Formatter)
+# ---------------------------------------------------------------------------
+
+[tool.black]
+line-length = 88
+target-version = ["py39"]
+skip-string-normalization = false
+
+
+# ---------------------------------------------------------------------------
+# Ruff (Linter)
+# ---------------------------------------------------------------------------
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]
+
+
+# ---------------------------------------------------------------------------
+# Mypy (Type Checking)
+# ---------------------------------------------------------------------------
+
+[tool.mypy]
+python_version = "3.9"
+strict = true
+ignore_missing_imports = true
+
+
+# ---------------------------------------------------------------------------
+# Pytest
+# ---------------------------------------------------------------------------
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+
+# ---------------------------------------------------------------------------
+# Coverage (optional)
+# ---------------------------------------------------------------------------
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
