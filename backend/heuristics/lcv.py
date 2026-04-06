@@ -1,126 +1,128 @@
 """
-mrv.py
+lcv.py
 
-Implementation of Minimum Remaining Values (MRV) heuristic for Sudoku CSP.
+Implementation of Least Constraining Value (LCV) heuristic for Sudoku CSP.
 
-MRV selects the variable (cell) with the smallest number of possible values,
-reducing branching factor and improving search efficiency.
+LCV selects values that eliminate the fewest options for neighboring variables,
+thereby preserving flexibility and reducing future conflicts.
 
-Author: dang67s & master: kennz_psix
+Author: kennz_psix
 """
 
-from typing import List, Set, Tuple, Optional
+from typing import List, Set, Tuple
 
 Board = List[List[int]]
 Domains = List[List[Set[int]]]
 
 
 # ---------------------------------------------------------------------------
-# MRV Core
+# Utility: Get peers
 # ---------------------------------------------------------------------------
 
-def find_mrv_cell(
-    board: Board,
-    domains: Domains
-) -> Optional[Tuple[int, int]]:
+def get_peers(row: int, col: int) -> Set[Tuple[int, int]]:
     """
-    Find the unassigned variable with the minimum remaining values (MRV).
-
-    Args:
-        board: Sudoku board
-        domains: domain grid
-
-    Returns:
-        (row, col) of selected cell, or None if all assigned
+    Return all peer cells of (row, col).
     """
+    peers = set()
 
-    min_domain_size = float("inf")
-    best_cell = None
+    # Row & Column
+    for i in range(9):
+        if i != col:
+            peers.add((row, i))
+        if i != row:
+            peers.add((i, col))
 
-    for row in range(9):
-        for col in range(9):
-            if board[row][col] == 0:
-                domain_size = len(domains[row][col])
+    # Subgrid
+    start_row, start_col = 3 * (row // 3), 3 * (col // 3)
+    for r in range(start_row, start_row + 3):
+        for c in range(start_col, start_col + 3):
+            if (r, c) != (row, col):
+                peers.add((r, c))
 
-                # Fail-fast: empty domain → dead end
-                if domain_size == 0:
-                    return (row, col)
-
-                if domain_size < min_domain_size:
-                    min_domain_size = domain_size
-                    best_cell = (row, col)
-
-    return best_cell
+    return peers
 
 
 # ---------------------------------------------------------------------------
-# MRV with Tie-Breaking Hook (Degree integration-ready)
+# LCV Core
 # ---------------------------------------------------------------------------
 
-def find_mrv_with_tiebreak(
+def count_constraints(
+    domains: Domains,
+    row: int,
+    col: int,
+    value: int
+) -> int:
+    """
+    Count how many domain values would be eliminated from neighbors
+    if 'value' is assigned to (row, col).
+
+    Lower count = better (less constraining).
+    """
+    impact = 0
+
+    for r, c in get_peers(row, col):
+        if value in domains[r][c]:
+            impact += 1
+
+    return impact
+
+
+def order_values_lcv(
     board: Board,
     domains: Domains,
-    degree_fn=None
-) -> Tuple[int, int]:
+    row: int,
+    col: int
+) -> List[int]:
     """
-    MRV with optional tie-breaking using Degree Heuristic.
+    Return values for (row, col) ordered by Least Constraining Value.
+
+    Strategy:
+    - Values that constrain neighbors the least come first
 
     Args:
         board: Sudoku board
         domains: domain grid
-        degree_fn: function(board, row, col) -> int
+        row, col: target cell
 
     Returns:
-        (row, col)
+        List of values sorted by LCV
     """
 
-    candidates = []
+    if board[row][col] != 0:
+        return [board[row][col]]
 
-    for row in range(9):
-        for col in range(9):
-            if board[row][col] == 0:
-                domain_size = len(domains[row][col])
+    values = list(domains[row][col])
 
-                if domain_size == 0:
-                    return (row, col)
+    # Sort by constraint impact (ascending)
+    values.sort(key=lambda v: count_constraints(domains, row, col, v))
 
-                if degree_fn:
-                    degree = degree_fn(board, row, col)
-                else:
-                    degree = 0
-
-                # Sort by:
-                # 1. smallest domain (MRV)
-                # 2. highest degree (tie-break)
-                candidates.append((domain_size, -degree, row, col))
-
-    if not candidates:
-        raise ValueError("No unassigned variables found.")
-
-    candidates.sort()
-    _, _, r, c = candidates[0]
-
-    return r, c
+    return values
 
 
 # ---------------------------------------------------------------------------
-# Optional: Domain Statistics (for analysis)
+# Optional: Detailed scoring (for analysis/debug)
 # ---------------------------------------------------------------------------
 
-def get_domain_stats(domains: Domains) -> dict:
+def score_values_lcv(
+    domains: Domains,
+    row: int,
+    col: int
+) -> List[Tuple[int, int]]:
     """
-    Return statistics about domain distribution.
+    Return (value, impact score) for debugging or visualization.
 
-    Useful for debugging or performance analysis.
+    Lower score = better choice.
     """
-    sizes = [len(domains[r][c]) for r in range(9) for c in range(9)]
+    scores = []
 
-    return {
-        "min": min(sizes),
-        "max": max(sizes),
-        "avg": sum(sizes) / len(sizes),
-        "empty": sum(1 for s in sizes if s == 0)
-    }
+    for value in domains[row][col]:
+        impact = count_constraints(domains, row, col, value)
+        scores.append((value, impact))
+
+    # Sort by least impact
+    scores.sort(key=lambda x: x[1])
+
+    return scores
 
 
 # ---------------------------------------------------------------------------
@@ -128,19 +130,18 @@ def get_domain_stats(domains: Domains) -> dict:
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    # Example board
-    board = [[0]*9 for _ in range(9)]
-
     # Example domains
     domains = [[set(range(1, 10)) for _ in range(9)] for _ in range(9)]
 
     # Simulate constraints
-    domains[0][0] = {1, 2}
-    domains[0][1] = {3}
-    domains[1][0] = {4, 5, 6}
+    domains[0][1] = {1}
+    domains[1][0] = {2}
+    domains[1][1] = {3}
 
-    cell = find_mrv_cell(board, domains)
-    print(f"MRV selected cell: {cell}")
+    row, col = 0, 0
 
-    stats = get_domain_stats(domains)
-    print("Domain stats:", stats)
+    print("LCV order:")
+    print(order_values_lcv([[0]*9 for _ in range(9)], domains, row, col))
+
+    print("\nDetailed scores:")
+    print(score_values_lcv(domains, row, col))
