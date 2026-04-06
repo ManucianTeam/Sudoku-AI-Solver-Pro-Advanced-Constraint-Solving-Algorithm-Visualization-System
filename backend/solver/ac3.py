@@ -6,7 +6,7 @@ Implementation of AC-3 (Arc Consistency Algorithm #3) for Sudoku CSP.
 AC-3 enforces arc consistency by iteratively removing inconsistent values
 from variable domains.
 
-Author: YourName
+Author: kennz_psix
 """
 
 from typing import List, Set, Tuple
