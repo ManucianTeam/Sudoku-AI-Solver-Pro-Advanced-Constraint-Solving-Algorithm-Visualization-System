@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku AI Solver Pro</title>
+
+    <style>
+        /* ------------------------------------------------------------------ */
+        /* Base */
+        /* ------------------------------------------------------------------ */
+
+        body {
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            color: #94a3b8;
+            margin-bottom: 20px;
+        }
+
+        /* ------------------------------------------------------------------ */
+        /* Grid */
+        /* ------------------------------------------------------------------ */
+
+        #sudoku-grid {
+            display: grid;
+            grid-template-columns: repeat(9, 45px);
+            grid-template-rows: repeat(9, 45px);
+            gap: 2px;
+            justify-content: center;
+            margin: 20px auto;
+        }
+
+        .cell {
+            width: 45px;
+            height: 45px;
+            text-align: center;
+            font-size: 18px;
+            border: 1px solid #334155;
+            background: #1e293b;
+            color: #e2e8f0;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .cell:focus {
+            background: #334155;
+        }
+
+        .highlight {
+            background: #22c55e !important;
+            color: black;
+        }
+
+        /* ------------------------------------------------------------------ */
+        /* Controls */
+        /* ------------------------------------------------------------------ */
+
+        .controls {
+            margin-top: 20px;
+        }
+
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            margin: 5px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #2563eb;
+        }
+
+        button.secondary {
+            background: #64748b;
+        }
+
+        button.secondary:hover {
+            background: #475569;
+        }
+
+        /* ------------------------------------------------------------------ */
+        /* Status */
+        /* ------------------------------------------------------------------ */
+
+        #status {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #38bdf8;
+        }
+
+        /* ------------------------------------------------------------------ */
+        /* Footer */
+        /* ------------------------------------------------------------------ */
+
+        footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🧩 Sudoku AI Solver Pro</h1>
+    <p class="subtitle">Advanced CSP • MRV • LCV • DLX • Visualization</p>
+
+    <!-- Grid -->
+    <div id="sudoku-grid"></div>
+
+    <!-- Controls -->
+    <div class="controls">
+        <button id="solve-btn">Solve (CSP)</button>
+        <button id="dlx-btn">Solve (DLX)</button>
+        <button id="example-btn" class="secondary">Load Example</button>
+        <button id="clear-btn" class="secondary">Clear</button>
+    </div>
+
+    <!-- Status -->
+    <p id="status">Ready</p>
+
+    <!-- Footer -->
+    <footer>
+        Built with Advanced Algorithms • CSP + Dancing Links
+    </footer>
+
+    <!-- Script -->
+    <script src="app.js"></script>
+
+</body>
+</html>
