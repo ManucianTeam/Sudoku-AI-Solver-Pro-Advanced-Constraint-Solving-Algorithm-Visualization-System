@@ -6,7 +6,7 @@ Implementation of Minimum Remaining Values (MRV) heuristic for Sudoku CSP.
 MRV selects the variable (cell) with the smallest number of possible values,
 reducing branching factor and improving search efficiency.
 
-Author: dang67s
+Author: kennz_psix X dang67s
 """
 
 from typing import List, Set, Tuple, Optional
