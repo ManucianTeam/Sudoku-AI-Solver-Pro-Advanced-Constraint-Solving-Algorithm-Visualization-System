@@ -8,7 +8,7 @@ This module provides:
 - Integration with MRV (Minimum Remaining Values)
 - Clean, extensible design for production-level solvers
 
-Author: YourName
+Author: kennz_psix X dang67s
 """
 
 from typing import List, Tuple, Set
