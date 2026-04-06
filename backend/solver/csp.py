@@ -9,7 +9,7 @@ Responsibilities:
 - Execute backtracking search
 - Provide clean API for external modules
 
-Author: YourName
+Author: kennz_psix
 """
 
 from typing import List, Set, Tuple, Optional
